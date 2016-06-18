@@ -1,3 +1,4 @@
+/*general styling*/
 html {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
@@ -19,12 +20,9 @@ body {
     outline: none !important;
 }
 
-.main-game-container{
-	height: 100vh;
-	width: 100%;
-	background-color: #00bad2;
-}
 
+
+/*sign in styling*/
 .sign-in-container{
 	height: 100vh;
 	width: 100%;
@@ -35,6 +33,18 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+/*	display: none;*/
+}
+
+.modal{
+	height: 43rem;
+	width: 35rem;
+	border-radius: 5px;
+	border-top: .5px #dedede solid;
+	border-left: .5px #dedede solid;
+	box-shadow: 5px 5px 5px #dedede;
+	background-color: #fff;
+	padding: 1rem;
 }
 
 h2{
@@ -57,7 +67,7 @@ h2{
 }
 .input:focus { 
     outline: none;
-    border-bottom: 2px #00bad2 solid;
+    border-bottom: 1px #00bad2 solid;
 }
 
 .avatar-wrapper{
@@ -72,20 +82,33 @@ h2{
 	width: 80px;
 	margin: 1rem;
 }
-.avatar-icons:hover{
+.avatar-wrapper .avatar-icons:hover, .selected{
 	border: 3px solid #84ffff;
 	border-radius: 50px;
 }
 
-.modal{
-	height: 38rem;
-	width: 35rem;
-	border-radius: 5px;
-	border-top: .5px #dedede solid;
-	border-left: .5px #dedede solid;
-	box-shadow: 5px 5px 5px #dedede;
-	background-color: #fff;
-	padding: 1rem;
+.button-wrapper{
+	text-align: right !important;
+}
+
+.user-submit{
+	font-size: 1.25rem;
+	padding: .75rem 1rem;
+	margin: 2rem 0;
+	margin-right: .5rem;
+	border: none;
+	background-color: #00bad2;
+	color: #fff;
+	border-radius: 25px;
+}
+
+.user-submit:hover{
+	background-color: #84ffff;
+	color: #333;
+}
+
+.user-submit:focus{
+	outline: none;
 }
 
 footer{
@@ -103,4 +126,87 @@ footer{
 a{
 	text-decoration: none;
 	color: #00bad2;
+}
+
+/*header styling*/
+header{
+	height: 6.5rem;
+	background-color: #fff;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-bottom: .5px #dedede solid;
+}
+
+.username h2{
+	margin-bottom: 0;
+}
+
+
+/*main game styling*/
+.main-game-container{
+	height: 100vh;
+	width: 100%;
+	background-color: #eee;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.game-container{
+	width: 60%;
+	text-align: center;
+	margin-right: 10rem;
+}
+
+canvas {
+	background-color: #fff;
+    width: 1000px;
+    height: 600px;
+    border: 1px #C7CACD solid;
+    margin: 0 auto;
+    border-radius: 5px;
+    border: .5px #dedede solid;
+}
+
+#guess-input{
+	width: 660px;
+	margin-bottom: 0;
+	margin-right: 2rem;
+	border-radius: 5px;
+	font-size: 1.25rem;
+	padding: .75rem 1rem;
+	border-bottom: none;
+	border: .5px #dedede solid;
+}
+
+.make-guess{
+	text-align: center;
+}
+
+.make-guess button{
+	background-color: #00bad2;
+	color: #fff;
+	font-size: 1.25rem;
+	padding: .75rem 1rem;
+	margin: 2rem 0;
+	border: none;
+	border-radius: 5px;
+	border: .5px #dedede solid;
+}
+
+.make-guess button:hover{
+	background-color: #84ffff;
+	color: #333;
+}
+
+.make-guess button:focus{
+	outline: none;
+}
+
+.chat-container{
+	background-color: #fff;
+	border: .5px #dedede solid;
+	height: 600px;
+	width: 300px;
 }

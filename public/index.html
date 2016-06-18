@@ -8,19 +8,32 @@
 	<meta name="pinterest" content="nopin" />
 </head>
 <body>
+	<header>
+		<div class="chosen-avatar">
+			<img class="avatar-icons" src="avatars/avatar1.png" alt="Avatar icon">
+		</div>
+		<div class="username"></div>
+	</header>
 	<div class="main-game-container">
-		
+		<div class="game-container">
+			<canvas id="canvas"></canvas>
+			<div class="make-guess">
+				<input id="guess-input" class="input" type="text" placeholder="Make A Guess Here">
+				<button class="guess-submit" type="button">Guess</button>
+			</div>
+		</div>
+		<div class="chat-container"></div>
 	</div>
 	<div class="sign-in-container">
 		<div class="modal">
 			<h2>Sign In</h2>
 			<div class="enter-names">
-				<input class="input" placeholder="First Name" type="text">
-				<input class="input" placeholder="Last Initial" type="text">
+				<input id="first-name" class="input" placeholder="First Name" type="text">
+				<input id="last-initial" class="input" placeholder="Last Initial" type="text">
 			</div>
 			<h2>Choose an Avatar</h2>
 			<div class="avatar-wrapper">
-				<img class="avatar-icons" src="avatars/avatar1.png" alt="Avatar icon">
+				<img class="avatar-icons selected" src="avatars/avatar1.png" alt="Avatar icon">
 				<img class="avatar-icons" src="avatars/avatar2.png" alt="Avatar icon">
 				<img class="avatar-icons" src="avatars/avatar3.png" alt="Avatar icon">
 				<img class="avatar-icons" src="avatars/avatar4.png" alt="Avatar icon">
@@ -33,12 +46,17 @@
 				<img class="avatar-icons" src="avatars/avatar11.png" alt="Avatar icon">
 				<img class="avatar-icons" src="avatars/avatar12.png" alt="Avatar icon">
 			</div>
+			<div class="button-wrapper">
+				<button class="user-submit" type="button">Submit</button>
+			</div>
 		</div>
+		<footer>
+			<a href="http://www.freepik.com/free-photos-vectors/people" target="_blank">People vector designed by Freepik</a>
+		</footer>
 	</div>
-	<footer>
-		<a href="http://www.freepik.com/free-photos-vectors/people" target="_blank">People vector designed by Freepik</a>
-	</footer>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
 	<script src="js/main.js"></script>
 </body>
 </html>
