@@ -150,7 +150,7 @@ header{
 	position: fixed;
 	top: 6.5rem;
 	left: 0;
-	height: 93.5vh;
+	height: calc(100% - 6.5rem);
 	width: 100%;
 	background-color: #ff8a80;
 	display: flex;
@@ -186,13 +186,18 @@ h3{
 
 .users-container > h3{
 	border-bottom: 3.5px #424242 solid;
-	padding: 1rem 0 .5rem 0;
+	line-height: 5rem;
 	text-align: center;
 	margin-bottom: 0;
 }
 
 .users-container{
 	border-right: 7px #424242 solid;
+}
+
+.users{
+	height: calc(100% - 5rem);
+	overflow: auto;
 }
 
 .user{
@@ -258,22 +263,25 @@ canvas {
 }
 
 .messages{
-	height: 60%;
+	height: calc(100% - 16rem);
+	overflow: auto;
 }
 
 .chat-message-input{
-	height: 40%;
+	height: 16rem;
 	padding: .5rem;
 	border-top: 3.5px #424242 solid;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin-bottom: 0;
 }
 
 .chat-message-input textarea{
 	width: 98%;
-	height: 55%;
+	height: 10rem;
 	border: .5px #dedede solid;
+	resize: none;
 }
 
 .chat-message-input textarea:focus{
