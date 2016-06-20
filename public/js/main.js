@@ -34,17 +34,22 @@ $(".user-submit").on("click", function(){
 	var lastInitial = $("#last-initial").val();
 	console.log(lastInitial);
 	//If no name is entered or avatar chosen, alert user to make a selection
-	if(firstName == "" || lastInitial == ""){
-		//how to do this ^^ for avatar?
-		alert("Please enter a first name and last initial");
+	if(firstName == "" && lastInitial == ""){
+		$(".enter-names").addClass("animated shake");
+	}
+	else if(firstName == ""){
+		$("#first-name").addClass("animated shake");
+	}
+	else if(lastInitial == "") {
+		$("#last-initial").addClass("animated shake");
 	}
 	else{
 		//Add username to div on main game 
 		$(".username").html("<h2>" + firstName + " " + lastInitial + "</h2");
 		var myUser = new User(firstName, lastInitial, selectedAvatar);
 		socket.emit("newUser", myUser);
-	}
 
-	//Hide sign in page and show main page
-	$(".sign-in-container").hide();
+		//Hide sign in page and show main page
+		$(".sign-in-container").hide();
+	}
 });

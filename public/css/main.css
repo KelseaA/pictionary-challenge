@@ -131,60 +131,111 @@ a{
 /*header styling*/
 header{
 	height: 6.5rem;
-	background-color: #fff;
+	width: 100%;
+	background-color: #00bad2;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	border-bottom: .5px #dedede solid;
+	border-bottom: 7px #424242 solid;
 }
 
 .username h2{
 	margin-bottom: 0;
+	color: #fff;
 }
 
 
 /*main game styling*/
 .main-game-container{
-	height: 100vh;
+	position: fixed;
+	top: 6.5rem;
+	left: 0;
+	height: 93.5vh;
 	width: 100%;
-	background-color: #eee;
+	background-color: #ff8a80;
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-between;
+	align-items: center;
+}
+
+canvas, #guess-input, .make-guess button{
+	border: .5px #dedede solid;
+}
+
+.users-container, .chat-container{
+	background-color: #fff;
+	height: 100%;
+	width: 18%;
+}
+
+.user:nth-child(even){
+	background-color: #eee;
+}
+
+.game-container, .make-guess{
+	text-align: center;
+}
+
+h3{
+	margin-bottom: 1.5rem;
+	color: #00bad2;
+	font-size: 1.25rem;
+	font-weight: normal;
+}
+
+.users-container > h3{
+	border-bottom: 3.5px #424242 solid;
+	padding: 1rem 0 .5rem 0;
+	text-align: center;
+	margin-bottom: 0;
+}
+
+.users-container{
+	border-right: 7px #424242 solid;
+}
+
+.user{
+	padding: .5rem 0;
+	padding-left: 1rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.user .avatar-icons{
+	margin: 0;
+}
+
+.user h3{
+	margin-bottom: 0;
+	margin-left: 1rem;
 }
 
 .game-container{
 	width: 60%;
-	text-align: center;
-	margin-right: 10rem;
+	height: 85%;
 }
 
 canvas {
 	background-color: #fff;
-    width: 1000px;
-    height: 600px;
-    border: 1px #C7CACD solid;
+    width: 90%;
+    height: 85%;
     margin: 0 auto;
     border-radius: 5px;
-    border: .5px #dedede solid;
 }
 
 #guess-input{
-	width: 660px;
+	width: 65%;
 	margin-bottom: 0;
 	margin-right: 2rem;
 	border-radius: 5px;
 	font-size: 1.25rem;
 	padding: .75rem 1rem;
 	border-bottom: none;
-	border: .5px #dedede solid;
 }
 
-.make-guess{
-	text-align: center;
-}
-
-.make-guess button{
+.make-guess button, .chat-submit{
 	background-color: #00bad2;
 	color: #fff;
 	font-size: 1.25rem;
@@ -192,21 +243,50 @@ canvas {
 	margin: 2rem 0;
 	border: none;
 	border-radius: 5px;
-	border: .5px #dedede solid;
 }
 
-.make-guess button:hover{
-	background-color: #84ffff;
-	color: #333;
+.make-guess button:hover, .chat-submit:hover{
+	background-color: #03a9f4;
 }
 
-.make-guess button:focus{
+.make-guess button:focus, .chat-submit:focus{
 	outline: none;
 }
 
 .chat-container{
-	background-color: #fff;
-	border: .5px #dedede solid;
-	height: 600px;
-	width: 300px;
+	border-left: 7px #424242 solid;
 }
+
+.messages{
+	height: 60%;
+}
+
+.chat-message-input{
+	height: 40%;
+	padding: .5rem;
+	border-top: 3.5px #424242 solid;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.chat-message-input textarea{
+	width: 98%;
+	height: 55%;
+	border: .5px #dedede solid;
+}
+
+.chat-message-input textarea:focus{
+	outline: none;
+}
+
+.chat-message-input textarea[placeholder]{
+	padding: .25rem 0 0 .25rem;
+	font-size: 1rem;
+}
+
+.chat-submit{
+	width: 98%;
+	margin: 1rem;
+}
+
