@@ -32,43 +32,33 @@
 					<img class="avatar-icons" src="avatars/avatar5.png" alt="Avatar icon">
 					<h3>Rob N</h3>
 				</div>
-				<div class="user">
-					<img class="avatar-icons" src="avatars/avatar2.png" alt="Avatar icon">
-					<h3>Sally B</h3>
-				</div>
-				<div class="user">
-					<img class="avatar-icons" src="avatars/avatar4.png" alt="Avatar icon">
-					<h3>John D</h3>
-				</div>
-				<div class="user">
-					<img class="avatar-icons" src="avatars/avatar5.png" alt="Avatar icon">
-					<h3>Rob N</h3>
-				</div>
-				<div class="user">
-					<img class="avatar-icons" src="avatars/avatar2.png" alt="Avatar icon">
-					<h3>Sally B</h3>
-				</div>
-				<div class="user">
-					<img class="avatar-icons" src="avatars/avatar4.png" alt="Avatar icon">
-					<h3>John D</h3>
-				</div>
-				<div class="user">
-					<img class="avatar-icons" src="avatars/avatar5.png" alt="Avatar icon">
-					<h3>Rob N</h3>
-				</div>
 			</div>
 		</div>
 		<div class="game-container">
-			<canvas id="canvas"></canvas>
+			<canvas id="canvas" width="850px" height="550px"></canvas>
 			<div class="make-guess">
 				<input id="guess-input" class="input" type="text" placeholder="Make A Guess Here">
 				<button class="guess-submit" type="button">Guess</button>
+			</div>
+			<div class="drawing-tools">
+			    <div class="controls">
+		            <ul>
+			            <li class="red selected-color"></li>
+			            <li class="yellow"></li>
+			            <li class="green"></li>
+			            <li class="blue"></li>
+			            <li class="purple"></li>
+			            <li class="black"></li>
+		            </ul>
+			    </div>
+			    <h3>Draw this: "Car"</h3>
+			    <h3>(Make sure to keep the answer a secret!)</h3>
 			</div>
 		</div>
 		<div class="chat-container">
 			<div class="messages"></div>
 			<div class="input chat-message-input">
-				<textarea type="text" placeholder="Enter Text..."></textarea>
+				<textarea id="chatbox" type="text" placeholder="Enter Text..."></textarea>
 				<button id="chat-submit" class="chat-submit" type="button">Enter</button>
 			</div>
 		</div>

@@ -11,6 +11,11 @@ var io = socket_io(server);
 //pictionary application variables
 var users = [];
 
+var Message = function(user, message){
+	this.user = user;
+	this.message = message;
+}
+
 io.on("connection", function(socket){
 	socket.on("newUser", function(newUser){
 		console.log(newUser);
@@ -18,6 +23,10 @@ io.on("connection", function(socket){
 		users[socket.id] = newUser;
 		socket.emit("updateUsers", users);
 	});
+	socket.on("sendMessage", function(message){
+		message = new Message(users[socket.id], message);
+		socket.emit("newMessage", message);
+	})
 	socket.on("disconnect", function(){
 		console.log(socket.id);
 		delete users[socket.id];
