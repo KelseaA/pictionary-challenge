@@ -26,9 +26,10 @@ io.on("connection", function(socket){
 	socket.on("sendMessage", function(message){
 		message = new Message(users[socket.id], message);
 		socket.emit("newMessage", message);
+		socket.broadcast.emit("newMessage", message);
 	})
 	socket.on("disconnect", function(){
-		console.log(socket.id);
+		// console.log(socket.id);
 		delete users[socket.id];
 		console.log(users);
 		socket.emit("updateUsers", users);

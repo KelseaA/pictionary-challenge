@@ -20,6 +20,15 @@ body {
     outline: none !important;
 }
 
+.pointer {
+	cursor: pointer;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
 
 /*sign in styling*/
 .sign-in-container{
@@ -33,7 +42,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	overflow: auto;
-	display: none;
+/*	display: none;*/
 }
 
 .modal{
@@ -340,6 +349,10 @@ ul li {
 .messages{
 	height: calc(100% - 16rem);
 	overflow: auto;
+}
+
+.chat-messages{
+	padding: .5rem;
 }
 
 .chat-message-input{

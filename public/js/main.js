@@ -1,6 +1,6 @@
 var socket = io();
 var selectedAvatar = "avatars/avatar1.png";
-var messages = [];
+var messages = $(".messages");
 
 var User = function(firstName, lastInitial, avatar){
 	this.firstName = firstName,
@@ -13,11 +13,43 @@ var updateUsers = function(users){
 }
 
 var newMessage = function(message){
-	console.log(message);
+	// console.log(message);
+	// console.log(message.user.firstName);
+	// console.log(message.message);
+	var name = message.user.firstName;
+	var initial = message.user.lastInitial;
+	var user = name + " " + initial;
+	var userMessage = message.message;
+	messages.append('<div class="chat-messages">' + user + ": " + userMessage+ "</div>");
 }
 
 socket.on("updateUsers", updateUsers);
 socket.on("newMessage", newMessage);
+
+
+//Send chat message button on click
+$("#chat-submit").on("click", function(){
+	sendMessage($("#chatbox").val());
+	$("#chatbox").val("");
+});
+
+//Send chat message on enter keypress
+$("#chatbox").on("keyup", function(event){
+	if(13 == event.which){
+		sendMessage($("#chatbox").val());
+		$("#chatbox").val("");
+	}
+});
+
+//Send chat message function
+function sendMessage(message){
+	console.log("This is my enter key message: " + message);
+	if("" != message){
+		socket.emit("sendMessage", message);
+	}
+}
+
+
 
 //Select avatar icon on click
 $(".avatar-icons").on("click", function(){
@@ -61,30 +93,6 @@ $(".user-submit").on("click", function(){
 		$(".sign-in-container").hide();
 	}
 });
-
-
-
-//Send chat message button on click
-$("#chat-submit").on("click", function(){
-	sendMessage($("#chatbox").val());
-	$("#chatbox").val("");
-});
-
-//Send chat message on enter keypress
-$("#chatbox").on("keyup", function(event){
-	if(13 == event.which){
-		sendMessage($("#chatbox").val());
-		$("#chatbox").val("");
-	}
-});
-
-//Send chat message function
-function sendMessage(message){
-	console.log(message);
-	if("" != message){
-		socket.emit("sendMessage", message);
-	}
-}
 
 
 var pictionary = function() {
