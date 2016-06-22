@@ -20,7 +20,7 @@ var newMessage = function(message){
 	var initial = message.user.lastInitial;
 	var user = name + " " + initial;
 	var userMessage = message.message;
-	messages.append('<div class="chat-messages">' + user + ": " + userMessage+ "</div>");
+	messages.append('<div class="chat-messages">' + user + ": " + userMessage + "</div>");
 }
 
 socket.on("updateUsers", updateUsers);
@@ -50,16 +50,13 @@ function sendMessage(message){
 }
 
 
-
 //Select avatar icon on click
 $(".avatar-icons").on("click", function(){
 	$(".avatar-icons").removeClass("selected");
 	$(this).addClass("selected");
-	console.log("avatar click");
 
 	//Assign avatar image choice to user on avatar click
 	selectedAvatar = $(".selected").attr("src");
-	console.log(selectedAvatar);
 
 	$(".chosen-avatar").html('<img class="avatar-icons" src="' + selectedAvatar + '">');
 });
@@ -68,9 +65,7 @@ $(".avatar-icons").on("click", function(){
 $(".user-submit").on("click", function(){
 	//Assign value of first and last name inputs to variables
 	var firstName = $("#first-name").val();
-	console.log(firstName);
 	var lastInitial = $("#last-initial").val();
-	console.log(lastInitial);
 	
 	//If no name is entered, shake missing area
 	if(firstName == "" && lastInitial == ""){
@@ -86,8 +81,14 @@ $(".user-submit").on("click", function(){
 	else{
 		//Add username to div on main game 
 		$(".username").html("<h2>" + firstName + " " + lastInitial + "</h2");
+
 		var myUser = new User(firstName, lastInitial, selectedAvatar);
 		socket.emit("newUser", myUser);
+		var name = myUser.firstName;
+		var initial = myUser.lastInitial;
+		var user = name + " " + initial;
+		var src = myUser.avatar;
+		$(".users").append('<div class="user"><img class="avatar-icons" src="' + src + '"><h3>' + user + '</h3></div>')
 
 		//Hide sign in page and show main page
 		$(".sign-in-container").hide();

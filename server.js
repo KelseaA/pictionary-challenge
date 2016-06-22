@@ -19,9 +19,10 @@ var Message = function(user, message){
 io.on("connection", function(socket){
 	socket.on("newUser", function(newUser){
 		console.log(newUser);
-		console.log(socket.id);
+		// console.log(socket.id);
 		users[socket.id] = newUser;
 		socket.emit("updateUsers", users);
+		socket.broadcast.emit("updateUsers", users);
 	});
 	socket.on("sendMessage", function(message){
 		message = new Message(users[socket.id], message);
