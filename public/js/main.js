@@ -13,9 +13,6 @@ var updateUsers = function(users){
 }
 
 var newMessage = function(message){
-	// console.log(message);
-	// console.log(message.user.firstName);
-	// console.log(message.message);
 	var name = message.user.firstName;
 	var initial = message.user.lastInitial;
 	var user = name + " " + initial;

@@ -8,7 +8,7 @@ app.use(express.static("public"));
 var server = http.Server(app);
 var io = socket_io(server);
 
-//pictionary application variables
+//pictionary application variabless
 var users = [];
 
 var Message = function(user, message){
@@ -18,21 +18,20 @@ var Message = function(user, message){
 
 io.on("connection", function(socket){
 	socket.on("newUser", function(newUser){
-		console.log(newUser);
-		// console.log(socket.id);
 		users[socket.id] = newUser;
+		console.log(newUser);
 		socket.emit("updateUsers", users);
+		console.log(users);
 		socket.broadcast.emit("updateUsers", users);
 	});
 	socket.on("sendMessage", function(message){
 		message = new Message(users[socket.id], message);
-		socket.emit("newMessage", message);
-		socket.broadcast.emit("newMessage", message);
+		io.emit("newMessage", message);
 	})
 	socket.on("disconnect", function(){
 		// console.log(socket.id);
 		delete users[socket.id];
-		console.log(users);
+		// console.log(users);
 		socket.emit("updateUsers", users);
 	});
 });
