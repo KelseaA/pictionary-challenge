@@ -19,20 +19,21 @@ var Message = function(user, message){
 io.on("connection", function(socket){
 	socket.on("newUser", function(newUser){
 		users[socket.id] = newUser;
-		console.log(newUser);
-		socket.emit("updateUsers", users);
-		console.log(users);
-		socket.broadcast.emit("updateUsers", users);
+		users.push(newUser);
+		io.emit("updateUsers", users);
 	});
 	socket.on("sendMessage", function(message){
 		message = new Message(users[socket.id], message);
 		io.emit("newMessage", message);
 	})
 	socket.on("disconnect", function(){
-		// console.log(socket.id);
-		delete users[socket.id];
+        console.log(users[socket.id].firstName + " " + users[socket.id].lastInitial + " has disconnected");
+
+        delete users[socket.id];
+
+        console.log(users[socket.id]);
 		// console.log(users);
-		socket.emit("updateUsers", users);
+		io.emit("updateUsers", users);
 	});
 });
 

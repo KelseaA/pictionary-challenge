@@ -9,7 +9,21 @@ var User = function(firstName, lastInitial, avatar){
 }
 
 var updateUsers = function(users){
-	console.log(users);
+	//clear users container
+		$(".users").empty();
+		console.log("Emptying container...");
+		
+	for (var i = 0; i < users.length; i++){
+		//assign users' firstName, lastInitial, and avatar to variables
+		var name = users[i].firstName;
+		var initial = users[i].lastInitial;
+		var user = name + " " + initial;
+		var avatarSrc = users[i].avatar;
+
+		//Add updated users to users container
+		$(".users").append('<div class="user"><img class="avatar-icons" src="' + avatarSrc + '"><h3>' + user + '</h3></div>')
+		console.log("Appending users...");
+	}
 }
 
 var newMessage = function(message){
@@ -81,11 +95,6 @@ $(".user-submit").on("click", function(){
 
 		var myUser = new User(firstName, lastInitial, selectedAvatar);
 		socket.emit("newUser", myUser);
-		var name = myUser.firstName;
-		var initial = myUser.lastInitial;
-		var user = name + " " + initial;
-		var src = myUser.avatar;
-		$(".users").append('<div class="user"><img class="avatar-icons" src="' + src + '"><h3>' + user + '</h3></div>')
 
 		//Hide sign in page and show main page
 		$(".sign-in-container").hide();
