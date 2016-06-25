@@ -28,11 +28,9 @@ io.on("connection", function(socket){
 	})
 	socket.on("disconnect", function(){
         console.log(users[socket.id].firstName + " " + users[socket.id].lastInitial + " has disconnected");
+        var disconnectedUser = users.indexOf(users[socket.id]);
+        users.splice(disconnectedUser, 1);
 
-        delete users[socket.id];
-
-        console.log(users[socket.id]);
-		// console.log(users);
 		io.emit("updateUsers", users);
 	});
 });
