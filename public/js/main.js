@@ -8,6 +8,12 @@ var User = function(firstName, lastInitial, avatar){
 	this.avatar = avatar
 }
 
+var DrawPosition = function(offsetX, offsetY, color){
+	this.offsetX = offsetX,
+	this.offsetY = offsetY,
+	this.color = color
+}
+
 var updateUsers = function(users){
 	//clear users container
 		$(".users").empty();
@@ -124,22 +130,42 @@ var pictionary = function() {
     
     //On mouse events on the canvas
     canvas.on("mousedown", function(event){
-        lastEvent = event;
+        lastEvent = new DrawPosition(event.offsetX, event.offsetY, color);
+        socket.emit("startDrawing", lastEvent);
         drawing = true;
     }).on("mousemove", function(event) {
        if(drawing){
-            context.beginPath();
-            context.moveTo(lastEvent.offsetX, lastEvent.offsetY);
-            context.lineTo(event.offsetX, event.offsetY);
-            context.strokeStyle = color;
-            context.stroke();
-            lastEvent = event;
+            // context.beginPath();
+            // context.moveTo(lastEvent.offsetX, lastEvent.offsetY);
+            // context.lineTo(event.offsetX, event.offsetY);
+            // context.strokeStyle = color;
+            // context.stroke();
+            // lastEvent = event;
+            var newCanvasPosition = new DrawPosition(event.offsetX, event.offsetY, color);
+            draw(newCanvasPosition);
+            socket.emit("draw", newCanvasPosition);
         }
     }).on("mouseup", function(event){
         drawing = false;
     }).on("mouseleave", function(){
         canvas.mouseup();
     });
+
+    function startDrawing(event){
+    	lastEvent = new DrawPosition(event.offsetX, event.offsetY, color);
+    }
+
+    function draw(event){
+    	context.beginPath();
+        context.moveTo(lastEvent.offsetX, lastEvent.offsetY);
+        context.lineTo(event.offsetX, event.offsetY);
+        context.strokeStyle = event.color;
+        context.stroke();
+        lastEvent = event;
+    }
+
+    socket.on("draw", draw);
+    socket.on("startDrawing", startDrawing);
 };
 
 

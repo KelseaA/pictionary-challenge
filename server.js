@@ -10,6 +10,7 @@ var io = socket_io(server);
 
 //pictionary application variabless
 var users = [];
+var usersIndex = [];
 
 var Message = function(user, message){
 	this.user = user;
@@ -17,22 +18,31 @@ var Message = function(user, message){
 }
 
 io.on("connection", function(socket){
+	socket.on("disconnect", function(){
+        // console.log(users[socket.id].firstName + " " + users[socket.id].lastInitial + " has disconnected");
+        var disconnectedUser = usersIndex.indexOf(socket.id);
+        console.log(users);
+        usersIndex.splice(disconnectedUser, 1);
+        users.splice(disconnectedUser, 1);
+
+		io.emit("updateUsers", users);
+	});
 	socket.on("newUser", function(newUser){
-		users[socket.id] = newUser;
+		usersIndex[socket.id] = newUser;
 		users.push(newUser);
+		console.log(users);
 		io.emit("updateUsers", users);
 	});
 	socket.on("sendMessage", function(message){
 		message = new Message(users[socket.id], message);
 		io.emit("newMessage", message);
-	})
-	socket.on("disconnect", function(){
-        console.log(users[socket.id].firstName + " " + users[socket.id].lastInitial + " has disconnected");
-        var disconnectedUser = users.indexOf(users[socket.id]);
-        users.splice(disconnectedUser, 1);
-
-		io.emit("updateUsers", users);
 	});
+	socket.on('draw', function(event){
+        socket.broadcast.emit('draw', event);
+    });
+	socket.on('startDrawing', function(event){
+        socket.broadcast.emit('startDrawing', event);
+    });
 });
 
 server.listen(8080);
