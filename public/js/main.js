@@ -2,6 +2,22 @@ var socket = io();
 var selectedAvatar = "avatars/avatar1.png";
 var messages = $(".messages");
 
+var WORDS = [
+    "word", "letter", "number", "person", "pen", "class", "people",
+    "sound", "water", "side", "place", "man", "men", "woman", "women", "boy",
+    "girl", "year", "day", "week", "month", "name", "sentence", "line", "air",
+    "land", "home", "hand", "house", "picture", "animal", "mother", "father",
+    "brother", "sister", "world", "head", "page", "country", "question",
+    "answer", "school", "plant", "food", "sun", "state", "eye", "city", "tree",
+    "farm", "story", "sea", "night", "day", "life", "north", "south", "east",
+    "west", "child", "children", "example", "paper", "music", "river", "car",
+    "foot", "feet", "book", "science", "room", "friend", "idea", "fish",
+    "mountain", "horse", "watch", "color", "face", "wood", "list", "bird",
+    "body", "dog", "family", "song", "door", "product", "wind", "ship", "area",
+    "rock", "order", "fire", "problem", "piece", "top", "bottom", "king",
+    "space"
+];
+
 var User = function(firstName, lastInitial, avatar){
 	this.firstName = firstName,
 	this.lastInitial = lastInitial,
@@ -135,12 +151,6 @@ var pictionary = function() {
         drawing = true;
     }).on("mousemove", function(event) {
        if(drawing){
-            // context.beginPath();
-            // context.moveTo(lastEvent.offsetX, lastEvent.offsetY);
-            // context.lineTo(event.offsetX, event.offsetY);
-            // context.strokeStyle = color;
-            // context.stroke();
-            // lastEvent = event;
             var newCanvasPosition = new DrawPosition(event.offsetX, event.offsetY, color);
             draw(newCanvasPosition);
             socket.emit("draw", newCanvasPosition);
@@ -150,6 +160,11 @@ var pictionary = function() {
     }).on("mouseleave", function(){
         canvas.mouseup();
     });
+
+    function getWord() {
+		var index = Math.floor(Math.random() * (WORDS.length - 1));
+		return WORDS[index];
+	};
 
     function startDrawing(event){
     	lastEvent = new DrawPosition(event.offsetX, event.offsetY, color);

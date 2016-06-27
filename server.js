@@ -18,15 +18,6 @@ var Message = function(user, message){
 }
 
 io.on("connection", function(socket){
-	socket.on("disconnect", function(){
-        // console.log(users[socket.id].firstName + " " + users[socket.id].lastInitial + " has disconnected");
-        var disconnectedUser = usersIndex.indexOf(socket.id);
-        console.log(users);
-        usersIndex.splice(disconnectedUser, 1);
-        users.splice(disconnectedUser, 1);
-
-		io.emit("updateUsers", users);
-	});
 	socket.on("newUser", function(newUser){
 		usersIndex[socket.id] = newUser;
 		users.push(newUser);
@@ -43,6 +34,15 @@ io.on("connection", function(socket){
 	socket.on('startDrawing', function(event){
         socket.broadcast.emit('startDrawing', event);
     });
+	socket.on("disconnect", function(){
+        // console.log(users[socket.id].firstName + " " + users[socket.id].lastInitial + " has disconnected");
+        var disconnectedUser = usersIndex.indexOf(socket.id);
+        console.log(users);
+        usersIndex.splice(disconnectedUser, 1);
+        users.splice(disconnectedUser, 1);
+
+		io.emit("updateUsers", users);
+	});
 });
 
 server.listen(8080);
