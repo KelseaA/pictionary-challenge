@@ -2,21 +2,6 @@ var socket = io();
 var selectedAvatar = "avatars/avatar1.png";
 var messages = $(".messages");
 
-var WORDS = [
-    "word", "letter", "number", "person", "pen", "class", "people",
-    "sound", "water", "side", "place", "man", "men", "woman", "women", "boy",
-    "girl", "year", "day", "week", "month", "name", "sentence", "line", "air",
-    "land", "home", "hand", "house", "picture", "animal", "mother", "father",
-    "brother", "sister", "world", "head", "page", "country", "question",
-    "answer", "school", "plant", "food", "sun", "state", "eye", "city", "tree",
-    "farm", "story", "sea", "night", "day", "life", "north", "south", "east",
-    "west", "child", "children", "example", "paper", "music", "river", "car",
-    "foot", "feet", "book", "science", "room", "friend", "idea", "fish",
-    "mountain", "horse", "watch", "color", "face", "wood", "list", "bird",
-    "body", "dog", "family", "song", "door", "product", "wind", "ship", "area",
-    "rock", "order", "fire", "problem", "piece", "top", "bottom", "king",
-    "space"
-];
 
 var User = function(firstName, lastInitial, avatar){
 	this.firstName = firstName,
@@ -44,20 +29,44 @@ var updateUsers = function(users){
 
 		//Add updated users to users container
 		$(".users").append('<div class="user"><img class="avatar-icons" src="' + avatarSrc + '"><h3>' + user + '</h3></div>')
-		console.log("Appending users...");
 	}
+	console.log("Appending users...");
 }
 
 var newMessage = function(message){
+	//create user variables
 	var name = message.user.firstName;
 	var initial = message.user.lastInitial;
 	var user = name + " " + initial;
+	//create user message variable
 	var userMessage = message.message;
+	//append user and message to messages
 	messages.append('<div class="chat-messages">' + user + ": " + userMessage + "</div>");
+}
+
+var newGame = function(data){
+	//clear canvas on new game
+	canvas = document.getElementById("canvas");
+	ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	if(data.iAmDrawing){
+		//send random word to drawer
+		$("#secret-word").text("Draw this: " + data.word);
+		//hide guess box
+		$(".make-guess").hide();
+		//show drawing tools/color pickers
+		$(".drawing-tools").show();
+	} 
+	else {
+		//show guess box and hide drawing tools if not drawer
+		$(".drawing-tools").hide();
+		$(".make-guess").show();
+	}
 }
 
 socket.on("updateUsers", updateUsers);
 socket.on("newMessage", newMessage);
+socket.on("newGame", newGame);
 
 
 //Send chat message button on click
@@ -161,11 +170,6 @@ var pictionary = function() {
         canvas.mouseup();
     });
 
-    function getWord() {
-		var index = Math.floor(Math.random() * (WORDS.length - 1));
-		return WORDS[index];
-	};
-
     function startDrawing(event){
     	lastEvent = new DrawPosition(event.offsetX, event.offsetY, color);
     }
@@ -187,7 +191,3 @@ var pictionary = function() {
 $(document).ready(function() {
     pictionary();
 });
-
-
-
-
