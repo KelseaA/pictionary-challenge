@@ -24,6 +24,7 @@ var words = ["word", "letter", "balloon", "number", "person", "pen",
 	"watch", "rainbow", "face", "wood", "list", "bird", "body", "dog", "family", 
 	"song", "door", "wind", "ship", "rock", "fire", "king"
 ];
+
 var User = function(firstName, lastInitial, avatar){
 	this.firstName = firstName,
 	this.lastInitial = lastInitial,
@@ -45,7 +46,6 @@ io.on("connection", function(socket){
 	socket.on("newUser", function(newUser){
 		newUser.id = socket.id;
 		users.push(newUser);
-		// console.log(users);
 		io.emit("updateUsers", users);
 		if(null === drawingUser){
 			drawingUser = socket.id;
@@ -59,7 +59,12 @@ io.on("connection", function(socket){
 		}
 	});
 	socket.on("sendMessage", function(message){
-		message = new Message(users[socket.id], message);
+		message = new Message(users, message);
+		for(var i = 0; i < users.length; i++){
+			console.log(users[i]);
+			io.emit("newMessage", message);
+		}
+		console.log(message);
 		io.emit("newMessage", message);
 	});
 	socket.on('draw', function(event){

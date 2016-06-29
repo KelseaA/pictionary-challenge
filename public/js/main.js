@@ -35,7 +35,7 @@ var updateUsers = function(users){
 
 var newMessage = function(message){
 	//create user variables
-	var name = message.user.firstName;
+	var name = message.user[firstName];
 	var initial = message.user.lastInitial;
 	var user = name + " " + initial;
 	//create user message variable
