@@ -1,3 +1,4 @@
+
 var http = require("http");
 var express = require("express");
 var socket_io = require("socket.io");
@@ -59,19 +60,32 @@ io.on("connection", function(socket){
 		}
 	});
 	socket.on("sendMessage", function(message){
-		message = new Message(users, message);
 		for(var i = 0; i < users.length; i++){
-			console.log(users[i]);
-			io.emit("newMessage", message);
+			if(socket.id === users[i].id){
+				message = new Message(users[i], message);
+        		io.emit("newMessage", message);
+        		break;
+        	}
 		}
-		console.log(message);
-		io.emit("newMessage", message);
 	});
 	socket.on('draw', function(event){
 		socket.broadcast.emit('draw', event);
 	});
 	socket.on('startDrawing', function(event){
 		socket.broadcast.emit('startDrawing', event);
+	});
+	socket.on("checkWord", function(word, fn, user){
+		if(guessWord === word){
+			user = socket.id;
+			console.log(user);
+			guessWord = getWord();
+			drawingUser = socket.id; // or random?
+			//newGame stuff, notify the new user who's drawing?
+			fn(true);
+        }
+		else{
+			fn(false);
+		}
 	});
 	socket.on("disconnect", function(){
         // console.log(users[socket.id].firstName + " " + users[socket.id].lastInitial + " has disconnected");
@@ -89,13 +103,6 @@ io.on("connection", function(socket){
         	else{
         		var index = Math.floor(Math.random() * (users.length - 1));
         		drawingUser = users[index].id;
-        		//send message to this user that they are drawing - iAmDrawing = true
-        			//message after receiving braodcast
-        		//send message to all other users saying it's a new game but they're not drawing
-        			//broadcast
-
-    //     		var data = {iAmDrawing: true, word: getWord()};
-				// socket.emit("newGame", data);
         	}
 			
 		}

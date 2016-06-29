@@ -34,8 +34,9 @@ var updateUsers = function(users){
 }
 
 var newMessage = function(message){
+	console.log(message);
 	//create user variables
-	var name = message.user[firstName];
+	var name = message.user.firstName;
 	var initial = message.user.lastInitial;
 	var user = name + " " + initial;
 	//create user message variable
@@ -68,6 +69,20 @@ socket.on("updateUsers", updateUsers);
 socket.on("newMessage", newMessage);
 socket.on("newGame", newGame);
 
+//Send user guess on button click
+$(".guess-submit").on("click", function(){
+	console.log("Guess submit clicked...");
+	checkWord($("#guess-input").val());
+	$("#guess-input").val("");
+});
+
+//Send user guess on enter keypress
+$("#guess-input").on("keyup", function(event){
+	if(13 == event.which){
+		checkWord($("#guess-input").val());
+		$("#guess-input").val("");
+	}
+});
 
 //Send chat message button on click
 $("#chat-submit").on("click", function(){
@@ -83,9 +98,23 @@ $("#chatbox").on("keyup", function(event){
 	}
 });
 
+//Send guess box function
+function checkWord(word){
+    if("" != word){
+        socket.emit("checkWord", word, function(correctGuess) {
+			if(correctGuess)
+			{
+				console.log("congratulations!");
+				$(".messages").append('<div class="chat-messages">' + "Congratulations, user! You guessed correctly. The word is " + word + "</div>");
+			}
+			console.log(correctGuess);
+		});
+    }
+    console.log(word);
+}
+
 //Send chat message function
 function sendMessage(message){
-	console.log("This is my enter key message: " + message);
 	if("" != message){
 		socket.emit("sendMessage", message);
 	}
