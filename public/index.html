@@ -8,18 +8,21 @@
 	<link rel="stylesheet" href="http://s.mlcdn.co/animate.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<meta name="pinterest" content="nopin" />
-</head>
-<body>
-	<header>
-		<div class="chosen-avatar">
-			<img class="avatar-icons" src="avatars/avatar1.png" alt="Avatar icon">
-		</div>
-		<div class="username"></div>
-	</header>
-	<div class="main-game-container">
-		<div class="users-container">
-			<h3>Online Users</h3>
-			<div class="users">
+	<!-- start Mixpanel --><script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+		for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+			mixpanel.init("145f128ab0facd2e289a75281be42627");</script><!-- end Mixpanel -->
+	</head>
+	<body>
+		<header>
+			<div class="chosen-avatar">
+				<img class="avatar-icons" src="avatars/avatar1.png" alt="Avatar icon">
+			</div>
+			<div class="username"></div>
+		</header>
+		<div class="main-game-container">
+			<div class="users-container">
+				<h3>Online Users</h3>
+				<div class="users">
 				<!-- <div class="user">
 					<img class="avatar-icons" src="avatars/avatar2.png" alt="Avatar icon">
 					<h3>Sally B</h3>
@@ -41,18 +44,18 @@
 				<button class="guess-submit" type="button">Guess</button>
 			</div>
 			<div class="drawing-tools">
-			    <div class="controls">
-		            <ul>
-			            <li class="red selected-color"></li>
-			            <li class="yellow"></li>
-			            <li class="green"></li>
-			            <li class="blue"></li>
-			            <li class="purple"></li>
-			            <li class="black"></li>
-		            </ul>
-			    </div>
-			    <h3 id="secret-word">Draw this: "Car"</h3>
-			    <h3>(Make sure to keep the answer a secret!)</h3>
+				<div class="controls">
+					<ul>
+						<li class="red selected-color"></li>
+						<li class="yellow"></li>
+						<li class="green"></li>
+						<li class="blue"></li>
+						<li class="purple"></li>
+						<li class="black"></li>
+					</ul>
+				</div>
+				<h3 id="secret-word">Draw this: "Car"</h3>
+				<h3>(Make sure to keep the answer a secret!)</h3>
 			</div>
 		</div>
 		<div class="chat-container">

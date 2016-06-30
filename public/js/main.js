@@ -65,9 +65,14 @@ var newGame = function(data){
 	}
 }
 
+var newWebMessage = function(message){
+	messages.append('<div class="chat-messages">' + message + "</div>");
+}
+
 socket.on("updateUsers", updateUsers);
 socket.on("newMessage", newMessage);
 socket.on("newGame", newGame);
+socket.on("newWebMessage", newWebMessage);
 
 //Send user guess on button click
 $(".guess-submit").on("click", function(){
@@ -101,13 +106,12 @@ $("#chatbox").on("keyup", function(event){
 //Send guess box function
 function checkWord(word){
     if("" != word){
-        socket.emit("checkWord", word, function(correctGuess) {
+    	mixpanel.track("User Guess Attempt");
+        socket.emit("checkUserWord", word, function(correctGuess) {
 			if(correctGuess)
 			{
-				console.log("congratulations!");
-				$(".messages").append('<div class="chat-messages">' + "Congratulations, user! You guessed correctly. The word is " + word + "</div>");
+				mixpanel.track("User Guessed Correctly");
 			}
-			console.log(correctGuess);
 		});
     }
     console.log(word);
@@ -154,6 +158,7 @@ $(".user-submit").on("click", function(){
 		$(".username").html("<h2>" + firstName + " " + lastInitial + "</h2");
 
 		var myUser = new User(firstName, lastInitial, selectedAvatar);
+		mixpanel.track("User Register");
 		socket.emit("newUser", myUser);
 
 		//Hide sign in page and show main page

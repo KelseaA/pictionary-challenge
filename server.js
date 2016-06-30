@@ -14,13 +14,13 @@ var users = [];
 var usersIndex = [];
 var drawingUser = null;
 var guessWord = "";
-var words = ["word", "letter", "balloon", "number", "person", "pen", 
+var words = ["letter", "balloon", "number", "person", "pen", 
 	"class", "music", "water", "man", "woman", "boy", "cat", "mouse", "robot", 
-	"girl", "year", "Christmas", "Halloween", "name", "flower", "air", "boat", 
+	"girl", "Christmas", "Halloween", "name", "flower", "boat", 
 	"hand", "house", "pig", "mother", "father", "corn", "brother", "sister", 
-	"world", "head", "country", "question", "school", "pizza", "sun", "sundae", 
-	"eye", "Eiffel Tower", "tree", "farm", "story", "sea", "night", "day", "north", 
-	"south", "east", "west", "child", "paper", "river", "car", "goat", "feet", 
+	"world", "head", "country", "school", "pizza", "sun", "sundae", 
+	"eye", "Eiffel Tower", "tree", "farm", "story", "sea", "night", "day", 
+	"child", "paper", "river", "car", "goat", "feet", 
 	"book", "science", "room", "friend", "idea", "fish", "mountain", "horse", 
 	"watch", "rainbow", "face", "wood", "list", "bird", "body", "dog", "family", 
 	"song", "door", "wind", "ship", "rock", "fire", "king"
@@ -47,6 +47,7 @@ io.on("connection", function(socket){
 	socket.on("newUser", function(newUser){
 		newUser.id = socket.id;
 		users.push(newUser);
+		io.emit("newWebMessage", newUser.firstName + " " + newUser.lastInitial + " just connected");
 		io.emit("updateUsers", users);
 		if(null === drawingUser){
 			drawingUser = socket.id;
@@ -74,23 +75,42 @@ io.on("connection", function(socket){
 	socket.on('startDrawing', function(event){
 		socket.broadcast.emit('startDrawing', event);
 	});
-	socket.on("checkWord", function(word, fn, user){
+	socket.on("checkUserWord", function(word, fn){
+		for(var i = 0; i < users.length; i++){
+			if(socket.id === users[i].id){
+				var user = users[i];
+        		break;
+        	}
+		}
 		if(guessWord === word){
-			user = socket.id;
-			console.log(user);
+			//emitting game winner
+			io.emit("newWebMessage", "Congratulations, " + user.firstName + " " + user.lastInitial + "! You guessed correctly. The word is " + word);
+			//sets new secret word
 			guessWord = getWord();
-			drawingUser = socket.id; // or random?
-			//newGame stuff, notify the new user who's drawing?
+			//sets new drawer to last winner
+			drawingUser = socket.id; 
+
+			//makes everyone not drawers
+			var data = {iAmDrawing: false};
+			socket.broadcast.emit("newGame", data);
+
+			//makes last winner drawer
+			var data = {iAmDrawing: true, word: guessWord};
+			socket.emit("newGame", data);
+
+			//lets users know who the new drawer is
+			io.emit("newWebMessage", "It's " + user.firstName + " " + user.lastInitial + "'s turn to draw");
 			fn(true);
         }
 		else{
+			socket.emit("newWebMessage", "Sorry, your guess is incorrect, " + user.firstName + " " + user.lastInitial);
 			fn(false);
 		}
 	});
 	socket.on("disconnect", function(){
-        // console.log(users[socket.id].firstName + " " + users[socket.id].lastInitial + " has disconnected");
         for(var i = 0; i < users.length; i++){
         	if(socket.id === users[i].id){
+        		io.emit("newWebMessage", users[i].firstName + " " + users[i].lastInitial + " just disconnected");
         		users.splice(i, 1);
         		io.emit("updateUsers", users);
         		break;
@@ -103,6 +123,9 @@ io.on("connection", function(socket){
         	else{
         		var index = Math.floor(Math.random() * (users.length - 1));
         		drawingUser = users[index].id;
+        		var data = {iAmDrawing: true, word: guessWord};
+        		io.emit("newWebMessage", "It's " + users[index].firstName + " " + users[index].lastInitial + "'s turn to draw");
+        		io.to(users[index].id).emit("newGame", data);
         	}
 			
 		}
