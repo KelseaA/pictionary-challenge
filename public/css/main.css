@@ -386,3 +386,28 @@ ul li {
 	margin: 1rem;
 }
 
+/*media queries*/
+@media only screen and (max-width: 1450px){
+	#canvas{
+		width: 700px;
+	}
+}
+
+@media only screen and (max-width: 1200px){
+	#canvas{
+		width: 600px;
+	}
+	.user .avatar-icons{
+		height: 60px;
+		width: 60px;
+	}
+	.user h3{
+		font-size: 1.1rem;
+	}
+}
+
+@media only screen and (max-width: 900px){
+
+}
+
+
