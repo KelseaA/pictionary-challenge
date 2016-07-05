@@ -1,6 +1,7 @@
 var socket = io();
 var selectedAvatar = "avatars/avatar1.png";
 var messages = $(".messages");
+var iAmDrawing = false;
 
 
 var User = function(firstName, lastInitial, avatar){
@@ -50,6 +51,7 @@ var newGame = function(data){
 	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	iAmDrawing = data.iAmDrawing;
 	if(data.iAmDrawing){
 		//send random word to drawer
 		$("#secret-word").text("Draw this: " + data.word);
@@ -189,9 +191,11 @@ var pictionary = function() {
     
     //On mouse events on the canvas
     canvas.on("mousedown", function(event){
-        lastEvent = new DrawPosition(event.offsetX, event.offsetY, color);
-        socket.emit("startDrawing", lastEvent);
-        drawing = true;
+    	if(iAmDrawing){
+			lastEvent = new DrawPosition(event.offsetX, event.offsetY, color);
+        	socket.emit("startDrawing", lastEvent);
+        	drawing = true;
+    	}
     }).on("mousemove", function(event) {
        if(drawing){
             var newCanvasPosition = new DrawPosition(event.offsetX, event.offsetY, color);
