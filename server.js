@@ -135,5 +135,5 @@ io.on("connection", function(socket){
 app.set("port", process.env.PORT || 8080);
 server.listen(process.env.PORT || 8080);
 
-exports.app = app;
-exports.storage = storage;
+// exports.app = app;
+// exports.storage = storage;
