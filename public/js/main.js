@@ -44,6 +44,9 @@ var newMessage = function(message){
 	var userMessage = message.message;
 	//append user and message to messages
 	messages.append('<div class="chat-messages">' + user + ": " + userMessage + "</div>");
+	//automatically show newest messages
+	var mydiv = $(".messages");
+	mydiv.scrollTop(mydiv.prop("scrollHeight"));
 }
 
 var newGame = function(data){
