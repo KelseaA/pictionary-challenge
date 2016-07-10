@@ -39,21 +39,25 @@ var newMessage = function(message){
 	//create user variables
 	var name = message.user.firstName;
 	var initial = message.user.lastInitial;
-	var user = name + " " + initial;
+	var user = name + " " + initial + ": ";
 	//create user message variable
 	var userMessage = message.message;
 	//append user and message to messages
-	messages.append('<div class="chat-messages">' + user + ": " + userMessage + "</div>");
+	messages.append('<div class="chat-messages"><div class="username-text">' + user + '</div><div>' + userMessage + '</div></div>');
 	//automatically show newest messages
 	var mydiv = $(".messages");
 	mydiv.scrollTop(mydiv.prop("scrollHeight"));
 }
 
-var newGame = function(data){
-	//clear canvas on new game
+var clearCanvas = function(){
+	//clear canvas
 	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+var newGame = function(data){
+	clearCanvas();
 	iAmDrawing = data.iAmDrawing;
 	if(data.iAmDrawing){
 		//send random word to drawer
@@ -69,7 +73,6 @@ var newGame = function(data){
 		$(".make-guess").show();
 	}
 }
-
 var newWebMessage = function(message){
 	messages.append('<div class="chat-messages">' + message + "</div>");
 }
@@ -111,12 +114,12 @@ $("#chatbox").on("keyup", function(event){
 //Send guess box function
 function checkWord(word){
     if("" != word){
-    	mixpanel.track("User Guess Attempt");
+    	// mixpanel.track("User Guess Attempt");
         socket.emit("checkUserWord", word, function(correctGuess) {
-			if(correctGuess)
-			{
-				mixpanel.track("User Guessed Correctly");
-			}
+			// if(correctGuess)
+			// {
+			// 	mixpanel.track("User Guessed Correctly");
+			// }
 		});
     }
     console.log(word);
@@ -163,12 +166,17 @@ $(".user-submit").on("click", function(){
 		$(".username").html("<h2>" + firstName + " " + lastInitial + "</h2");
 
 		var myUser = new User(firstName, lastInitial, selectedAvatar);
-		mixpanel.track("User Register");
+		// mixpanel.track("User Register");
 		socket.emit("newUser", myUser);
 
 		//Hide sign in page and show main page
 		$(".sign-in-container").hide();
 	}
+});
+
+//clears canvas on button click
+$(".clear-board").on("click", function(){
+	clearCanvas();
 });
 
 
@@ -232,3 +240,4 @@ var pictionary = function() {
 $(document).ready(function() {
     pictionary();
 });
+

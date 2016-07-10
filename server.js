@@ -82,9 +82,9 @@ io.on("connection", function(socket){
         		break;
         	}
 		}
-		if(guessWord === word){
+		if(guessWord.toLowerCase() === word.toLowerCase()){
 			//emitting game winner
-			io.emit("newWebMessage", "Congratulations, " + user.firstName + " " + user.lastInitial + "! You guessed correctly. The word is " + word);
+			io.emit("newWebMessage", "Congratulations, " + user.firstName + " " + user.lastInitial + "! You guessed correctly. The word is " + guessWord);
 			//sets new secret word
 			guessWord = getWord();
 			//sets new drawer to last winner
@@ -134,6 +134,3 @@ io.on("connection", function(socket){
 
 app.set("port", process.env.PORT || 8080);
 server.listen(process.env.PORT || 8080);
-
-// exports.app = app;
-// exports.storage = storage;

@@ -41,13 +41,14 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-wrap: wrap;
 	overflow: auto;
 /*	display: none;*/
 }
 
 .modal{
-	height: 43rem;
-	width: 35rem;
+	height: 38rem;
+	width: 30rem;
 	border-radius: 5px;
 	border-top: .5px #dedede solid;
 	border-left: .5px #dedede solid;
@@ -57,9 +58,13 @@ body {
 }
 
 h2{
-	margin-bottom: 1.5rem;
+	margin-bottom: 1.25rem;
 	color: #00bad2;
 	font-weight: normal;
+}
+
+.choose-avatar{
+	margin-bottom: .5rem;
 }
 
 .enter-names{
@@ -87,8 +92,8 @@ h2{
 }
 
 .avatar-icons{
-	height: 80px;
-	width: 80px;
+	height: 60px;
+	width: 60px;
 	margin: 1rem;
 }
 .avatar-wrapper .avatar-icons:hover, .selected{
@@ -238,8 +243,6 @@ h3{
 
 canvas {
 	background-color: #fff;
-    /*width: 90%;*/
-    /*height: 85%;*/
     margin: 0 auto;
     border-radius: 5px;
 }
@@ -254,11 +257,11 @@ canvas {
 	border-bottom: none;
 }
 
-.make-guess{
+/*.make-guess{
     display: none;
-}
+}*/
 
-.make-guess button, .chat-submit{
+.make-guess button, .chat-submit, .clear-board{
 	background-color: #b388ff;
 	color: #fff;
 	font-size: 1.25rem;
@@ -268,11 +271,11 @@ canvas {
 	border-radius: 5px;
 }
 
-.make-guess button:hover, .chat-submit:hover{
+.make-guess button:hover, .chat-submit:hover, .clear-board:hover{
 	background-color: #03a9f4;
 }
 
-.make-guess button:focus, .chat-submit:focus{
+.make-guess button:focus, .chat-submit:focus, .clear-board:focus{
 	outline: none;
 }
 
@@ -283,19 +286,22 @@ canvas {
 }
 
 .controls {
-	min-height: 60px;
+	height: 85px;
 	margin: 0 auto;
-	width: 600px;
+	width: 675px;
 	border-radius: 5px;
 	overflow: hidden;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 }
 
 ul {
-	list-style:none;
+	list-style: none;
 	margin: 0;
-	float: 	left;
+	margin-right: 2rem;
 	padding-top: 1rem;
-	width: 100%;
 	text-align: center;
 }
 
@@ -307,6 +313,10 @@ ul li {
 	border-radius: 60px;
 	cursor: pointer;
 	border: 0;
+}
+
+.clear-board{
+	margin-left: 2rem;
 }
 
 .red {
@@ -352,8 +362,16 @@ ul li {
 	overflow: auto;
 }
 
+.username-text{
+	color: #00bad2;
+	margin-right: .25rem;
+}
+
 .chat-messages{
 	padding: .5rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .chat-message-input{
@@ -386,29 +404,4 @@ ul li {
 	width: 98%;
 	margin: 1rem;
 }
-
-/*media queries*/
-@media only screen and (max-width: 1450px){
-	#canvas{
-		width: 700px;
-	}
-}
-
-@media only screen and (max-width: 1200px){
-	#canvas{
-		width: 600px;
-	}
-	.user .avatar-icons{
-		height: 60px;
-		width: 60px;
-	}
-	.user h3{
-		font-size: 1.1rem;
-	}
-}
-
-@media only screen and (max-width: 900px){
-	/*make chat container flow to bottom and take up full screen width*/
-}
-
 
