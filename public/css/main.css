@@ -248,7 +248,7 @@ canvas {
 }
 
 #guess-input{
-	width: 65%;
+	width: 60%;
 	margin-bottom: 0;
 	margin-right: 2rem;
 	border-radius: 5px;
@@ -362,16 +362,12 @@ ul li {
 	overflow: auto;
 }
 
-.username-text{
+.notifications{
 	color: #00bad2;
-	margin-right: .25rem;
 }
 
 .chat-messages{
 	padding: .5rem;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
 }
 
 .chat-message-input{

@@ -43,7 +43,7 @@ var newMessage = function(message){
 	//create user message variable
 	var userMessage = message.message;
 	//append user and message to messages
-	messages.append('<div class="chat-messages"><div class="username-text">' + user + '</div><div>' + userMessage + '</div></div>');
+	messages.append('<div class="chat-messages">' + user + userMessage + '</div>');
 	//automatically show newest messages
 	var mydiv = $(".messages");
 	mydiv.scrollTop(mydiv.prop("scrollHeight"));
@@ -74,7 +74,7 @@ var newGame = function(data){
 	}
 }
 var newWebMessage = function(message){
-	messages.append('<div class="chat-messages">' + message + "</div>");
+	messages.append('<div class="chat-messages notifications">' + message + "</div>");
 }
 
 socket.on("updateUsers", updateUsers);
