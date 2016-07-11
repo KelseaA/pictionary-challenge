@@ -198,9 +198,15 @@ header{
 	margin-bottom: 0;
 }
 
-i{
+/*i{
 	font-size: 1.5rem !important;
 	color: #00bad2;
+}*/
+
+#close{
+	font-size: 1.5rem;
+	color: #00bad2;
+	margin-bottom: 0;
 }
 
 .how-to-modal p{

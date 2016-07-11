@@ -188,7 +188,7 @@ $(".how-to").on("click", function(){
 });
 
 //closes how-to modal on click
-$("#modal-close").on("click", function(){
+$("#close").on("click", function(){
 	$("#how-to-modal-container").hide();
 });
 
