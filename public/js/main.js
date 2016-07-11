@@ -51,8 +51,8 @@ var newMessage = function(message){
 
 var clearCanvas = function(){
 	//clear canvas
-	canvas = document.getElementById("canvas");
-	ctx = canvas.getContext("2d");
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
@@ -81,6 +81,7 @@ socket.on("updateUsers", updateUsers);
 socket.on("newMessage", newMessage);
 socket.on("newGame", newGame);
 socket.on("newWebMessage", newWebMessage);
+socket.on("clearCanvas", clearCanvas);
 
 //Send user guess on button click
 $(".guess-submit").on("click", function(){
@@ -179,6 +180,7 @@ $(".user-submit").on("click", function(){
 //clears canvas on button click
 $(".clear-board").on("click", function(){
 	clearCanvas();
+	socket.emit("clearCanvas");
 });
 
 //opens how-to modal on click

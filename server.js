@@ -75,6 +75,10 @@ io.on("connection", function(socket){
 	socket.on('startDrawing', function(event){
 		socket.broadcast.emit('startDrawing', event);
 	});
+	socket.on("clearCanvas", function(){
+		io.emit("clearCanvas");
+		console.log("canvas cleared");
+	})
 	socket.on("checkUserWord", function(word, fn){
 		for(var i = 0; i < users.length; i++){
 			if(socket.id === users[i].id){
