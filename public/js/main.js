@@ -171,12 +171,25 @@ $(".user-submit").on("click", function(){
 
 		//Hide sign in page and show main page
 		$(".sign-in-container").hide();
+
+		$("#how-to-modal-container").hide();
 	}
 });
 
 //clears canvas on button click
 $(".clear-board").on("click", function(){
 	clearCanvas();
+});
+
+//opens how-to modal on click
+$(".how-to").on("click", function(){
+	$("#how-to-modal-container").show();
+	console.log("you clicked on how to");
+});
+
+//closes how-to modal on click
+$("#modal-close").on("click", function(){
+	$("#how-to-modal-container").hide();
 });
 
 
@@ -239,5 +252,6 @@ var pictionary = function() {
 
 $(document).ready(function() {
     pictionary();
+    $("#how-to-modal-container").hide();
 });
 

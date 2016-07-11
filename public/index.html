@@ -5,9 +5,8 @@
 	<title>Pictionary Challenge</title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet">
 	<link rel="stylesheet" href="http://s.mlcdn.co/animate.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link href="lib/css/nanoscroller.css" rel="stylesheet">
-  	<link href="lib/css/emoji.css" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	</head>
 
@@ -17,6 +16,20 @@
 				<img class="avatar-icons" src="avatars/avatar1.png" alt="Avatar icon">
 			</div>
 			<div class="username"></div>
+			<div class="how-to pointer">
+				<h2>How to Play</h2>
+			</div>
+			<div id="how-to-modal-container">
+				<div class="how-to-modal modal">
+					<div class="modal-top-line">
+						<h2>How to Play</h2>
+						<i id="modal-close" class="fa fa-times" aria-hidden="true"></i>
+					</div>
+					<p>The first person to log in becomes the first person to draw. All other users make guesses in the guess box. Once someone guesses correctly, a new game is started and the person who won the last game becomes the next person to draw.</p>
+					<p>All users can communicate using the chat window at any point during the game.</p>
+					<p>Enjoy!</p>
+				</div>
+			</div>
 		</header>
 		<div class="main-game-container">
 			<div class="users-container">

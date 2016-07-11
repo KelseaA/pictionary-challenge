@@ -153,11 +153,60 @@ header{
 	border-bottom: 7px #424242 solid;
 }
 
-.username h2{
+.username h2, .how-to h2{
 	margin-bottom: 0;
 	color: #fff;
 }
 
+.how-to{
+	position: fixed;
+	top: 2.1rem;
+	right: 1rem;
+}
+
+#how-to-modal-container{
+	z-index: 1;
+	height: 100vh;
+	width: 100%;
+	background-color: rgba(238,238,238, .75);
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.how-to-modal{
+	height: 20rem;
+	width: 30rem;
+	border-radius: 5px;
+	border: .5px #dedede solid;
+	background-color: #fff;
+	padding: 1rem;
+}
+
+.modal-top-line{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2rem;
+}
+
+.modal-top-line h2{
+	margin-bottom: 0;
+}
+
+i{
+	font-size: 1.5rem !important;
+	color: #00bad2;
+}
+
+.how-to-modal p{
+	line-height: 1.5rem;
+	margin-bottom: 1.5rem;
+}
 
 /*main game styling*/
 .main-game-container{
