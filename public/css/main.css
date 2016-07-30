@@ -198,11 +198,6 @@ header{
 	margin-bottom: 0;
 }
 
-/*i{
-	font-size: 1.5rem !important;
-	color: #00bad2;
-}*/
-
 #close{
 	font-size: 1.5rem;
 	color: #00bad2;
@@ -312,10 +307,6 @@ canvas {
 	border-bottom: none;
 }
 
-/*.make-guess{
-    display: none;
-}*/
-
 .make-guess button, .chat-submit, .clear-board{
 	background-color: #b388ff;
 	color: #fff;
@@ -336,9 +327,6 @@ canvas {
 
 
 /*color picker and secret word styling*/
-.drawing-tools{
-/*	display: none;*/
-}
 
 .controls {
 	height: 85px;
